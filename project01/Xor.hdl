@@ -1,0 +1,17 @@
+// Exclusive-or gate: f = (a AND NOT b) OR (NOT a AND b)
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // 取反輸出
+    Not(in=a, out=nota);
+    Not(in=b, out=notb);
+    
+    // 交叉與操作
+    And(a=a, b=notb, out=aAndNotb);
+    And(a=nota, b=b, out=notaAndb);
+    
+    // 最後進行或操作
+    Or(a=aAndNotb, b=notaAndb, out=out);
+}
